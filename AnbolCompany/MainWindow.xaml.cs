@@ -23,7 +23,7 @@ namespace AnbolCompany
         public MainWindow()
         {
             InitializeComponent();
-            frame.Navigate(new Authorization());
+            frame.Navigate(new Registration());
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e) => ThemeChange.Change();

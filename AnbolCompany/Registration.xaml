@@ -9,6 +9,40 @@
       Title="Registration">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="117*"/>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="110*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Регистрация" FontSize="20" Margin="50,0,0,0"/>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Width="200">
+            <TextBlock Text="Имя"/>
+            <TextBox x:Name="name" Width="200"/>
+            <TextBlock Text="Фамилия"/>
+            <TextBox x:Name="lastname" Width="200"/>
+            <TextBlock Text="Отчество"/>
+            <TextBox x:Name="firstname" Width="200"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Width="200">
+            <TextBlock Text="Имя"/>
+            <TextBox x:Name="email" Width="200"/>
+            <TextBlock Text="Фамилия"/>
+            <TextBox x:Name="phone" Width="200"/>
+            <TextBlock Text="Отчество"/>
+            <ComboBox x:Name="gender" Width="200" Height="20"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="200">
+            <TextBlock Text="Логин"/>
+            <TextBox x:Name="login" Width="200"/>
+            <TextBlock Text="Пароль"/>
+            <PasswordBox x:Name="password" Width="200"/>
+        </StackPanel>
+        <Button Grid.Row="3" Content="Подтвердить" Width="120" Height="30" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+
     </Grid>
 </Page>

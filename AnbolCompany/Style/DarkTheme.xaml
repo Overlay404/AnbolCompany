@@ -7,12 +7,12 @@
         <Setter Property="TextBlock.FontFamily" Value="Candara"/>
     </Style>
 
-    <Style TargetType="TextBox" x:Key="StyleTextBox">
+    <Style TargetType="TextBox">
         <Setter Property="Background" Value="#FF373737"/>
         <Setter Property="Foreground" Value="#FFDFDFDF"/>
     </Style>
 
-    <Style TargetType="PasswordBox" x:Key="StylePaswordBox">
+    <Style TargetType="PasswordBox">
         <Setter Property="Background" Value="#FF373737"/>
         <Setter Property="Foreground" Value="#FFDFDFDF"/>
     </Style>
@@ -23,11 +23,11 @@
         <Setter Property="BorderThickness" Value="1 0 1 1"/>
     </Style>
 
-    <Style TargetType="Image" x:Name="imageStyle">
+    <Style TargetType="Image">
         <Setter Property="Source" Value="\Image\WhiteThemeIcon.png" />
     </Style>
 
-    <Style TargetType="ListBox" x:Name="StyleListBox">
+    <Style TargetType="ListBox">
         <Setter Property="Background" Value="#FF373737"/>
         <Setter Property="Foreground" Value="#FFDFDFDF"/>
     </Style>
@@ -63,7 +63,8 @@
         <Setter Property="Foreground" Value="#FFDFDFDF"/>
 
     </Style>
-    <Style TargetType="Button" x:Key="ButtonNotInAdmin">
+    
+    <Style TargetType="Button">
         <Setter Property="Background" Value="#FFE2E2E2"/>
         <Setter Property="Foreground" Value="#FF373737"/>
         <Setter Property="Template">
@@ -88,28 +89,6 @@
                 <Setter Property="Background" Value="#FFB9B9B9"/>
             </Trigger>
         </Style.Triggers>
-    </Style>
-
-    <Style TargetType="Button" x:Key="ButtomInAdmin">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border x:Name="BorderButton" CornerRadius="5" BorderBrush="#000" Background="{TemplateBinding Background}" BorderThickness="0.8" Padding="2" >
-
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="BorderBrush" TargetName="BorderButton" Value="#5F68E3"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="BorderButton" Property="Background" Value="#5F68E3" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
     
 </ResourceDictionary>

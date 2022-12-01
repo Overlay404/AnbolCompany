@@ -62,7 +62,7 @@
         <Setter Property="BorderThickness" Value="1 0 1 1"/>
     </Style>
 
-    <Style TargetType="Button" x:Key="ButtonNotInAdmin">
+    <Style TargetType="Button">
         <Setter Property="Background" Value="#FF404040"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
@@ -88,32 +88,4 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <Style TargetType="Button" x:Key="ButtomInAdmin">
-        <Setter Property="Background" Value="#FF404040"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="10"
-                                Background="{TemplateBinding Background}">
-
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect Color="#FF505050" Direction="310" ShadowDepth="5" Opacity="0.3"/>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF636363"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-    
 </ResourceDictionary>
