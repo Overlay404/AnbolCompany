@@ -20,12 +20,38 @@ namespace AnbolCompany
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public static MainWindow Instance { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            frame.Navigate(new Registration());
+            Instance = this;
+            frame.Navigate(new Authorization());
+            Autorization.IsChecked = true;
+            new VisibleRadiuButton();
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e) => ThemeChange.Change();
+
+        private void Autorization_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new Authorization());
+        }
+
+        private void Registration_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new Registration());
+        }
+
+        private void Product_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Order_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
-            <RowDefinition Height="117*"/>
-            <RowDefinition Height="133*"/>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="140*"/>
             <RowDefinition Height="110*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Регистрация" FontSize="20" Margin="50,0,0,0"/>

@@ -24,7 +24,7 @@
             <TextBlock Text="Логин"/>
             <TextBox x:Name="login" Width="200"/>
         </StackPanel>
-        <Button Grid.Row="3" HorizontalAlignment="Center" Content="Вход" Height="30" Width="60"/>
+        <Button Grid.Row="3" HorizontalAlignment="Center" Content="Вход" Height="30" Width="60" Click="Button_Click"/>
 
     </Grid>
 </Page>

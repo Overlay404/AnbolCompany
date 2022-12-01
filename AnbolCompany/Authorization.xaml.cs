@@ -24,5 +24,18 @@ namespace AnbolCompany
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.db.Users.Where(u => u.login.Equals(login.Text.Trim()) && u.password.Equals(password.Password.Trim())).Select(u => u).FirstOrDefault() != null)
+            {
+                App.user = App.db.Users.Where(u => u.login.Equals(login.Text.Trim()) && u.password.Equals(password.Password.Trim())).Select(u => u).FirstOrDefault();
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не найден");
+            }
+            new VisibleRadiuButton();
+        }
     }
 }

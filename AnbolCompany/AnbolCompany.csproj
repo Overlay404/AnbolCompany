@@ -125,6 +125,7 @@
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
     <Compile Include="ThemeChange.cs" />
+    <Compile Include="VisibleRadiuButton.cs" />
     <Page Include="Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
