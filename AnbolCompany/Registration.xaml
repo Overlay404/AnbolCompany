@@ -19,7 +19,9 @@
             <RowDefinition Height="140*"/>
             <RowDefinition Height="110*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Регистрация" FontSize="20" Margin="50,0,0,0"/>
+        <TextBlock Text="Регистрация" FontSize="20" VerticalAlignment="Center"  Margin="50,0,0,0"/>
+        <TextBlock Text="Выберете роль:" Grid.Column="1" VerticalAlignment="Center" Margin="130 0 0 0"/>
+        <ComboBox x:Name="role" Width="150" Height="20" HorizontalAlignment="Right" Grid.Column="1"/>
         <StackPanel HorizontalAlignment="Center" Grid.Row="1" Width="200">
             <TextBlock Text="Имя"/>
             <TextBox x:Name="name" Width="200"/>
@@ -29,20 +31,21 @@
             <TextBox x:Name="firstname" Width="200"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Width="200">
-            <TextBlock Text="Имя"/>
+            <TextBlock Text="Почта"/>
             <TextBox x:Name="email" Width="200"/>
-            <TextBlock Text="Фамилия"/>
+            <TextBlock Text="Телефон"/>
             <TextBox x:Name="phone" Width="200"/>
-            <TextBlock Text="Отчество"/>
+            <TextBlock Text="Пол"/>
             <ComboBox x:Name="gender" Width="200" Height="20"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Width="200">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Width="200">
             <TextBlock Text="Логин"/>
             <TextBox x:Name="login" Width="200"/>
             <TextBlock Text="Пароль"/>
             <PasswordBox x:Name="password" Width="200"/>
         </StackPanel>
-        <Button Grid.Row="3" Content="Подтвердить" Width="120" Height="30" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="infoText" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Red"/>
+        <Button Grid.Row="3" Content="Подтвердить" Width="120" Height="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="Button_Click"/>
 
     </Grid>
 </Page>

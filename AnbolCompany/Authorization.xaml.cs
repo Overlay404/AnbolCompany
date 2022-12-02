@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,13 +21,22 @@ namespace AnbolCompany
     /// </summary>
     public partial class Authorization : Page
     {
+        public static Authorization Instance { get; private set; }  
         public Authorization()
         {
             InitializeComponent();
+            Instance = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (login.Text.Trim().Length <= 0 || password.Password.Trim().Length <= 0)
+            {
+                clearValue();
+                MessageBox.Show("Введите логин и пароль");
+                return;
+            }
+
             if (App.db.Users.Where(u => u.login.Equals(login.Text.Trim()) && u.password.Equals(password.Password.Trim())).Select(u => u).FirstOrDefault() != null)
             {
                 App.user = App.db.Users.Where(u => u.login.Equals(login.Text.Trim()) && u.password.Equals(password.Password.Trim())).Select(u => u).FirstOrDefault();
@@ -36,6 +46,11 @@ namespace AnbolCompany
                 MessageBox.Show("Пользователь не найден");
             }
             new VisibleRadiuButton();
+        }
+        void clearValue()
+        {
+            login.Text = "";
+            password.Password = "";
         }
     }
 }

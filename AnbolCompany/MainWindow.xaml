@@ -9,7 +9,7 @@
 
     <Grid Style="{DynamicResource StyleGrid}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="49*"/>
+            <RowDefinition Height="35*"/>
             <RowDefinition Height="365*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
