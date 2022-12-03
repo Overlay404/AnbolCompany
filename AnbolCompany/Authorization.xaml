@@ -14,6 +14,7 @@
             <RowDefinition Height="11*"/>
             <RowDefinition Height="11*"/>
             <RowDefinition Height="11*"/>
+            <RowDefinition Height="11*"/>
             <RowDefinition Height="28*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Авторизация" FontSize="20" Margin="50,0,0,0"/>
@@ -25,7 +26,10 @@
             <TextBlock Text="Логин"/>
             <TextBox x:Name="login" Width="200"/>
         </StackPanel>
-        <Button Grid.Row="3" HorizontalAlignment="Center" Content="Вход" Height="30" Width="60" Click="Button_Click"/>
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <CheckBox x:Name="saveDataCheckBox" Content="Чужой компьютер"/>
+        </StackPanel>
+        <Button Grid.Row="4" HorizontalAlignment="Center" Content="Вход" Height="30" Width="60" Click="Button_Click"/>
 
     </Grid>
 </Page>

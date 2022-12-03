@@ -30,6 +30,9 @@ namespace AnbolCompany
             frame.Navigate(new Authorization());
             Autorization.IsChecked = true;
             new VisibleRadiuButton();
+
+            var isAuth = Authorization.isAuth;
+            Authorization.checkAuthorizationUser(isAuth);
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e) => ThemeChange.Change();
@@ -50,6 +53,25 @@ namespace AnbolCompany
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exitImage_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Authorization.isAuth)
+            {
+                Authorization.isAuth = false;
+                Authorization.checkAuthorizationUser(Authorization.isAuth);
+            }
+            else
+            {
+                if(MessageBox.Show("Вы хотите выйти из приложения?", "Выйти", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    this.Close();
+            }
+        }
+
+        private void frame_Navigated(object sender, NavigationEventArgs e)
         {
 
         }

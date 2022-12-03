@@ -21,31 +21,59 @@ namespace AnbolCompany
     /// </summary>
     public partial class Authorization : Page
     {
-        public static Authorization Instance { get; private set; }  
+        public static Authorization Instance { get; private set; }
+        public static bool isAuth = false;
         public Authorization()
         {
             InitializeComponent();
             Instance = this;
+
+            login.Text = Properties.Settings.Default.login;
+            password.Password = Properties.Settings.Default.password;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (login.Text.Trim().Length <= 0 || password.Password.Trim().Length <= 0)
-            {
-                clearValue();
-                MessageBox.Show("Введите логин и пароль");
-                return;
-            }
+            if (login.Text.Trim().Length <= 0 || password.Password.Trim().Length <= 0) { clearValue(); MessageBox.Show("Введите логин и пароль"); return; }
 
             if (App.db.Users.Where(u => u.login.Equals(login.Text.Trim()) && u.password.Equals(password.Password.Trim())).Select(u => u).FirstOrDefault() != null)
-            {
                 App.user = App.db.Users.Where(u => u.login.Equals(login.Text.Trim()) && u.password.Equals(password.Password.Trim())).Select(u => u).FirstOrDefault();
+            else
+                MessageBox.Show("Пользователь не найден");
+
+            new VisibleRadiuButton();
+
+            if (saveDataCheckBox.IsChecked == false)
+            {
+                Properties.Settings.Default.login = login.Text.Trim();
+                Properties.Settings.Default.password = password.Password.Trim();
             }
             else
             {
-                MessageBox.Show("Пользователь не найден");
+                Properties.Settings.Default.login = null;
+                Properties.Settings.Default.password = null;
             }
-            new VisibleRadiuButton();
+            Properties.Settings.Default.Save();
+            if (App.user != null)
+                isAuth = true;
+            checkAuthorizationUser(isAuth);
+        }
+
+        public static void checkAuthorizationUser(bool isAuth)
+        {
+            if (isAuth)
+            {
+                MainWindow.Instance.Autorization.Visibility = Visibility.Collapsed;
+                MainWindow.Instance.Registration.Visibility = Visibility.Collapsed;
+                //MainWindow.Instance.frame.Navigate(new ());
+            }
+            else
+            {
+                App.user = null;
+                MainWindow.Instance.Autorization.Visibility = Visibility.Visible;
+                MainWindow.Instance.Registration.Visibility = Visibility.Visible;
+                new VisibleRadiuButton();
+            }
         }
         void clearValue()
         {

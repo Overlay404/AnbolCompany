@@ -23,8 +23,11 @@
         <Setter Property="BorderThickness" Value="1 0 1 1"/>
     </Style>
 
-    <Style TargetType="Image">
+    <Style TargetType="Image" x:Key="themeChancheImage">
         <Setter Property="Source" Value="\Image\WhiteThemeIcon.png" />
+    </Style>
+    <Style TargetType="Image" x:Key="exitImage">
+        <Setter Property="Source" Value="\Image\whiteExit.png" />
     </Style>
 
     <Style TargetType="ListBox">

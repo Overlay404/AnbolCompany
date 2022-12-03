@@ -17,8 +17,11 @@
         <Setter Property="Foreground" Value="#FF2B2B2B"/>
     </Style>
 
-    <Style TargetType="Image" x:Name="imageStyle">
+    <Style TargetType="Image" x:Key="themeChancheImage">
         <Setter Property="Source" Value="\Image\BlackThemeIcon.png" />
+    </Style>
+    <Style TargetType="Image" x:Key="exitImage">
+        <Setter Property="Source" Value="\Image\blackExit.png" />
     </Style>
 
     <Style TargetType="ListBox">

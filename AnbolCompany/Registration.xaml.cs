@@ -45,6 +45,7 @@ namespace AnbolCompany
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string pass = password.Password.Trim();
             timer.Start();
 
             startButtonUser();
@@ -54,9 +55,9 @@ namespace AnbolCompany
             if (email.Text.Trim().Length <= 0 || !new Regex(@"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$").IsMatch(email.Text.Trim())) { errorUserInput(email); infoText.Text = textForInfoTextBox("почта") + " или не соответствует формату почты"; return; }
             if (phone.Text.Trim().Length <= 10 || !phone.Text.Trim().All(p => char.IsDigit(p))) { errorUserInput(phone); infoText.Text = textForInfoTextBox("телефон") + " или не соотвутсвует формату записи номера. Пример: 10000000000"; return; }
             if (login.Text.Trim().Length <= 0 || App.db.Users.Select(u => u.login).Contains(login.Text)) { errorUserInput(login); infoText.Text = textForInfoTextBox("логин") + " или такой логин уже используется"; return; }
-            if (password.Password.Trim().Length < 6 || !new Regex(@"[!@#$%^]").IsMatch(password.Password.Trim()) || !password.Password.Trim().Any(p => char.IsDigit(p)) || password.Password.Trim().Equals(password.Password.Trim().ToLower())){ password.BorderBrush = new SolidColorBrush(Colors.Red); infoText.Text = textForInfoTextBox("пароль") + " или нет прописной буквы, цифры или же знака: ! @ # $ % ^ "; return; }
+            if (password.Password.Trim().Length < 6 || !new Regex(@"[!@#$%^]").IsMatch(password.Password.Trim()) || !password.Password.Trim().Any(p => char.IsDigit(p)) || password.Password.Trim().Equals(password.Password.Trim().ToLower())) { password.BorderBrush = new SolidColorBrush(Colors.Red); infoText.Text = textForInfoTextBox("пароль") + " или нет прописной буквы, цифры или же знака: ! @ # $ % ^ "; return; }
 
-            App.db.Users.Add(new User 
+            App.db.Users.Add(new User
             {
                 name = name.Text.Trim(),
                 lastname = lastname.Text.Trim(),
@@ -69,12 +70,11 @@ namespace AnbolCompany
                 RoleId = App.db.RoleIds.Where(r => r.name.Equals(role.SelectedItem.ToString())).Select(r => r.id).FirstOrDefault()
             });
             App.db.SaveChanges();
-            MessageBox.Show("" + password.Password);
 
             MainWindow.Instance.frame.Navigate(new Authorization());
             MainWindow.Instance.Autorization.IsChecked = true;
             Authorization.Instance.login.Text = Instance.login.Text;
-            Authorization.Instance.password.Password = Instance.password.Password;
+            Authorization.Instance.password.Password = pass;
         }
 
         private void Timer_Elapsed(object sender, EventArgs e) { Instance.infoText.Text = ""; timer.Stop(); }
