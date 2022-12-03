@@ -27,24 +27,24 @@ namespace AnbolCompany
         {
             InitializeComponent();
             Instance = this;
-            frame.Navigate(new Authorization());
+            frame.Navigate(new AuthRegist.Authorization());
             Autorization.IsChecked = true;
             new VisibleRadiuButton();
 
-            var isAuth = Authorization.isAuth;
-            Authorization.checkAuthorizationUser(isAuth);
+            var isAuth = AuthRegist.Authorization.isAuth;
+            AuthRegist.Authorization.checkAuthorizationUser(isAuth);
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e) => ThemeChange.Change();
 
         private void Autorization_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new Authorization());
+            frame.Navigate(new AuthRegist.Authorization());
         }
 
         private void Registration_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new Registration());
+            frame.Navigate(new AuthRegist.Registration());
         }
 
         private void Product_Click(object sender, RoutedEventArgs e)
@@ -56,13 +56,17 @@ namespace AnbolCompany
         {
 
         }
+        private void Info_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new UserInfo());
+        }
 
         private void exitImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (Authorization.isAuth)
+            if (AuthRegist.Authorization.isAuth)
             {
-                Authorization.isAuth = false;
-                Authorization.checkAuthorizationUser(Authorization.isAuth);
+                AuthRegist.Authorization.isAuth = false;
+                AuthRegist.Authorization.checkAuthorizationUser(AuthRegist.Authorization.isAuth);
             }
             else
             {

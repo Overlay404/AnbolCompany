@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace AnbolCompany
+namespace AnbolCompany.AuthRegist
 {
     /// <summary>
     /// Логика взаимодействия для Registration.xaml

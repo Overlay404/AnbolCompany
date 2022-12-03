@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AnbolCompany
+namespace AnbolCompany.AuthRegist
 {
     /// <summary>
     /// Логика взаимодействия для Authorization.xaml
@@ -65,13 +65,16 @@ namespace AnbolCompany
             {
                 MainWindow.Instance.Autorization.Visibility = Visibility.Collapsed;
                 MainWindow.Instance.Registration.Visibility = Visibility.Collapsed;
-                //MainWindow.Instance.frame.Navigate(new ());
+                MainWindow.Instance.frame.Navigate(new UserInfo());
+                MainWindow.Instance.Info.IsChecked = true;
             }
             else
             {
                 App.user = null;
                 MainWindow.Instance.Autorization.Visibility = Visibility.Visible;
                 MainWindow.Instance.Registration.Visibility = Visibility.Visible;
+                MainWindow.Instance.frame.Navigate(new Authorization());
+                MainWindow.Instance.Autorization.IsChecked = true;
                 new VisibleRadiuButton();
             }
         }

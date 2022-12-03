@@ -20,6 +20,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <RadioButton x:Name="Autorization" Style="{DynamicResource RadioButton}" Content="Вход" Width="70" Click="Autorization_Click"/>
             <RadioButton x:Name="Registration" Style="{DynamicResource RadioButton}" Content="Регистрация" Width="100" Click="Registration_Click"/>
+            <RadioButton x:Name="Info" Style="{DynamicResource RadioButton}" Content="О себе" Width="70" Click="Info_Click"/>
             <RadioButton x:Name="Product" Style="{DynamicResource RadioButton}" Content="Продукты" Width="80" Click="Product_Click"/>
             <RadioButton x:Name="Order" Style="{DynamicResource RadioButton}" Content="Заказы" Width="70" Click="Order_Click"/>
         </StackPanel>

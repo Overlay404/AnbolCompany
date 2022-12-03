@@ -64,10 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Authorization.xaml.cs">
+    <Compile Include="AuthRegist\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Registration.xaml.cs">
+    <Compile Include="AuthRegist\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resourses\Anbol.Context.cs">
@@ -125,8 +125,11 @@
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
     <Compile Include="ThemeChange.cs" />
+    <Compile Include="UserInfo.xaml.cs">
+      <DependentUpon>UserInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VisibleRadiuButton.cs" />
-    <Page Include="Authorization.xaml">
+    <Page Include="AuthRegist\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,7 +145,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Registration.xaml">
+    <Page Include="AuthRegist\Registration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\WhiteTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
