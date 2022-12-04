@@ -26,8 +26,17 @@
     <Style TargetType="Image" x:Key="themeChancheImage">
         <Setter Property="Source" Value="\Image\WhiteThemeIcon.png" />
     </Style>
+    
     <Style TargetType="Image" x:Key="exitImage">
         <Setter Property="Source" Value="\Image\whiteExit.png" />
+    </Style>
+    
+    <Style TargetType="Image" x:Key="editImage">
+        <Setter Property="Source" Value="\Image\editImageBlack.png" />
+    </Style>
+    
+    <Style TargetType="Image" x:Key="plusImage">
+        <Setter Property="Source" Value="\Image\plusImageBlack.png" />
     </Style>
 
     <Style TargetType="ListBox">

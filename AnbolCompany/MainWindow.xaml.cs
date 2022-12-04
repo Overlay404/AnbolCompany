@@ -33,6 +33,9 @@ namespace AnbolCompany
 
             var isAuth = AuthRegist.Authorization.isAuth;
             AuthRegist.Authorization.checkAuthorizationUser(isAuth);
+
+            editImage.Visibility = Visibility.Collapsed;
+            plusImage.Visibility = Visibility.Collapsed;
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e) => ThemeChange.Change();
@@ -77,7 +80,8 @@ namespace AnbolCompany
 
         private void frame_Navigated(object sender, NavigationEventArgs e)
         {
-
+            if(frame.Content.ToString().Equals("AnbolCompany.UserInfo"))
+                editImage.Visibility = Visibility.Visible;
         }
     }
 }

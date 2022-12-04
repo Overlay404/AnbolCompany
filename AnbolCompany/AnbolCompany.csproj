@@ -206,6 +206,12 @@
   <ItemGroup>
     <Resource Include="Image\blackExit.png" />
     <Resource Include="Image\whiteExit.png" />
+    <Resource Include="Image\editImageWhite.png" />
+    <Resource Include="Image\nullImagePeopleBlack.png" />
+    <Resource Include="Image\nullImagePeopleWhite.png" />
+    <Resource Include="Image\plusImageBlack.png" />
+    <Resource Include="Image\plusImageWhite.png" />
+    <Resource Include="Image\editImageBlack.png" />
     <Content Include="Resourses\Anbol.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Anbol.edmx</DependentUpon>

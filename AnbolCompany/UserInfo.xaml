@@ -9,6 +9,26 @@
       Title="UserInfo">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="49*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Image x:Name="image" Width="200" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="name" IsEnabled="False" Background="#00000000" FontSize="20" Margin="30 30 0 0"/>
+                <TextBox x:Name="email" IsEnabled="False" Background="#00000000" Margin="30 10 0 0" Text="Почта: "/>
+                <TextBox x:Name="phone" IsEnabled="False" Background="#00000000" Margin="30 10 0 0" Text="Телефон: "/>
+                <TextBox x:Name="gender" IsEnabled="False" Background="#00000000" Margin="30 10 0 0" Text="Пол: "/>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock x:Name="loginText" Text="Нажмите чтобы увидеть логин" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="1" Margin="30 47 0 0" MouseUp="TextBlock_MouseUp"/>
+        <TextBlock x:Name="passwordText" Text="Нажмите чтобы увидеть пароль" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="1" Margin="30 75 0 0" MouseUp="passwordText_MouseUp"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Логин и пароль:" Margin="30 0 0 0" FontSize="20"/>
+            <TextBox x:Name="login" Visibility="Hidden" HorizontalAlignment="Left" Background="#00000000" Margin="30 20 0 0"/>
+            <TextBox x:Name="password" Visibility="Hidden" HorizontalAlignment="Left" Background="#00000000" Margin="30 10 0 0"/>
+        </StackPanel>
+        <Button x:Name="confirm" Content="Подтвердить" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 10 10" Height="30" Width="100" Click="confirm_Click"/>
     </Grid>
 </Page>

@@ -13,9 +13,12 @@
             <RowDefinition Height="365*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
-        <Image HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="1" Width="20" Height="20" Margin="0 10 50 0" Style="{DynamicResource themeChancheImage}" MouseUp="Image_MouseUp"/>
-        
-        <Image x:Name="exitImage" HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="1" Width="25" Height="20" Margin="0 10 10 0" Style="{DynamicResource exitImage}" MouseUp="exitImage_MouseUp"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Image x:Name="plusImage" VerticalAlignment="Top" Panel.ZIndex="1" Width="25" Height="25" Margin="0 6 10 0" Style="{DynamicResource plusImage}"/>
+            <Image x:Name="editImage" VerticalAlignment="Top" Panel.ZIndex="1" Width="20" Height="20" Margin="0 10 10 0" Style="{DynamicResource editImage}"/>
+            <Image VerticalAlignment="Top" Panel.ZIndex="1" Width="20" Height="20" Margin="0 10 10 0" Style="{DynamicResource themeChancheImage}" MouseUp="Image_MouseUp"/>
+            <Image x:Name="exitImage" VerticalAlignment="Top" Panel.ZIndex="1" Width="25" Height="20" Margin="0 10 10 0" Style="{DynamicResource exitImage}" MouseUp="exitImage_MouseUp"/>
+        </StackPanel>
         <Frame x:Name="frame" Grid.Row="1" NavigationUIVisibility="Hidden" Navigated="frame_Navigated"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <RadioButton x:Name="Autorization" Style="{DynamicResource RadioButton}" Content="Вход" Width="70" Click="Autorization_Click"/>
