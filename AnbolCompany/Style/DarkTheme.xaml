@@ -4,7 +4,6 @@
     <Style x:Key="StyleGrid">
         <Setter Property="Grid.Background" Value="#FF404040"/>
         <Setter Property="TextBlock.Foreground" Value="#FFDFDFDF"/>
-        <Setter Property="TextBlock.FontFamily" Value="Candara"/>
     </Style>
 
     <Style TargetType="TextBox">
@@ -26,17 +25,21 @@
     <Style TargetType="Image" x:Key="themeChancheImage">
         <Setter Property="Source" Value="\Image\WhiteThemeIcon.png" />
     </Style>
-    
+
     <Style TargetType="Image" x:Key="exitImage">
         <Setter Property="Source" Value="\Image\whiteExit.png" />
     </Style>
-    
+
     <Style TargetType="Image" x:Key="editImage">
         <Setter Property="Source" Value="\Image\editImageBlack.png" />
     </Style>
-    
+
     <Style TargetType="Image" x:Key="plusImage">
         <Setter Property="Source" Value="\Image\plusImageBlack.png" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="peopleImage">
+        <Setter Property="Source" Value="\Image\nullImagePeopleBlack.png" />
     </Style>
 
     <Style TargetType="ListBox">
@@ -100,7 +103,6 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#FFB9B9B9"/>
             </Trigger>
-            
         </Style.Triggers>
     </Style>
 
@@ -131,5 +133,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
 </ResourceDictionary>

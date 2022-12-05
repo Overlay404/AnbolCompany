@@ -70,6 +70,9 @@
     <Compile Include="AuthRegist\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Products.xaml.cs">
+      <DependentUpon>Products.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resourses\Anbol.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Products.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\DarkTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +219,9 @@
     <Resource Include="Image\plusImageBlack.png" />
     <Resource Include="Image\plusImageWhite.png" />
     <Resource Include="Image\editImageBlack.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
     <Content Include="Resourses\Anbol.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Anbol.edmx</DependentUpon>

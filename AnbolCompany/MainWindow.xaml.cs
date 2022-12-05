@@ -52,7 +52,7 @@ namespace AnbolCompany
 
         private void Product_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.Navigate(new Products());
         }
 
         private void Order_Click(object sender, RoutedEventArgs e)
@@ -82,6 +82,10 @@ namespace AnbolCompany
         {
             if(frame.Content.ToString().Equals("AnbolCompany.UserInfo"))
                 editImage.Visibility = Visibility.Visible;
+            else
+            {
+                editImage.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

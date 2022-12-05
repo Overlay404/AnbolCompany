@@ -4,12 +4,16 @@
     <Style x:Key="StyleGrid">
         <Setter Property="Grid.Background" Value="#FFE2E2E2"/>
         <Setter Property="TextBlock.Foreground" Value="#FF2B2B2B"/>
-        <Setter Property="TextBlock.FontFamily" Value="Candara"/>
     </Style>
 
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="#FF2B2B2B"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="#FF2B2B2B"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="PasswordBox">
@@ -31,6 +35,10 @@
     
     <Style TargetType="Image" x:Key="plusImage">
         <Setter Property="Source" Value="\Image\plusImageWhite.png" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="peopleImage">
+        <Setter Property="Source" Value="\Image\nullImagePeopleWhite.png" />
     </Style>
 
     <Style TargetType="ListBox">
