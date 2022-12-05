@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,17 @@ namespace AnbolCompany
             quantity.SelectedIndex = 0;
             filtration.SelectedIndex = 0;
             sorting.SelectedIndex = 0;
+
+            listProducts.ItemsSource = (from products in App.db.Products
+                                       select new
+                                       {
+                                           unit = App.db.Units.Where(u => u.meaning.Equals(products.Unit)).FirstOrDefault().meaning.ToString(),
+                                           date = products.date.ToString(),
+                                           description = products.description.ToString(),
+                                           cost = products.cost.ToString(),
+                                           count = products.count.ToString(),
+                                           country = App.db.Countries.Where(c => c.nameCountry.Equals(products.CountryId)).FirstOrDefault().nameCountry.ToString()
+                                       }).ToList();
         }
     }
 }

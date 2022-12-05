@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Кол-во элементов"/>
+                <TextBlock Text="Кол-во элементов" Margin="10 0 0 0"/>
                 <ComboBox x:Name="quantity" Margin="10 0 0 0">
                     <ComboBoxItem Tag="0" Content="Все"/>
                     <ComboBoxItem Tag="1" Content="2"/>
@@ -51,15 +51,15 @@
                     <Border Padding="5" CornerRadius="10" BorderBrush="Black" BorderThickness="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"></ColumnDefinition>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="630"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20"></RowDefinition>
-                                <RowDefinition Height="60"></RowDefinition>
-                                <RowDefinition Height="20"></RowDefinition>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.RowSpan="3" Grid.Column="0" Width="100" Height="100" Source="{Binding photoPath}"/>
+                            <Image Grid.RowSpan="3" Grid.Column="0" Width="100" Height="100"/>
                             <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding date}"/>
                             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                             <TextBlock Text="{Binding nameProduct}"/>
@@ -68,8 +68,8 @@
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding description}"/>
                             <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding count}"/>
                             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1"> 
-                            <TextBlock Text="{Binding cost}" FontSize="13"/>
-                            <TextBlock Text="{Binding country}" Margin="10 0 0 0" Background="{Binding colorCountry}"/>
+                            <TextBlock Text="{Binding cost}" FontSize="14"/>
+                            <TextBlock Text="{Binding country}" Margin="10 0 0 0"/>
                             </StackPanel>
                         </Grid>
                     </Border>
