@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AnbolCompany.Resourses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,16 +30,19 @@ namespace AnbolCompany
             filtration.SelectedIndex = 0;
             sorting.SelectedIndex = 0;
 
-            listProducts.ItemsSource = (from products in App.db.Products
-                                       select new
-                                       {
-                                           unit = App.db.Units.Where(u => u.meaning.Equals(products.Unit)).FirstOrDefault().meaning.ToString(),
-                                           date = products.date.ToString(),
-                                           description = products.description.ToString(),
-                                           cost = products.cost.ToString(),
-                                           count = products.count.ToString(),
-                                           country = App.db.Countries.Where(c => c.nameCountry.Equals(products.CountryId)).FirstOrDefault().nameCountry.ToString()
-                                       }).ToList();
+            listProducts.ItemsSource = App.db.Products.ToList();
+            foreach (var entity in listProducts.Items)
+            {
+                if ((entity as Product).count < 0)
+                {
+                    (entity as ListViewItem).Background = new SolidColorBrush(Colors.Blue);
+                }
+            }
+        }
+
+        private void listProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("" + (listProducts.SelectedItem as Product).nameProduct);
         }
     }
 }

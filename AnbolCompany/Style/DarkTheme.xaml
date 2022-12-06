@@ -42,6 +42,10 @@
         <Setter Property="Source" Value="\Image\nullImagePeopleBlack.png" />
     </Style>
 
+    <Style TargetType="Image" x:Key="productImage">
+        <Setter Property="Source" Value="\Image\nullImagePeopleBlack.png" />
+    </Style>
+
     <Style TargetType="ListBox">
         <Setter Property="Background" Value="#FF373737"/>
         <Setter Property="Foreground" Value="#FFDFDFDF"/>
@@ -76,7 +80,16 @@
     <Style TargetType="DataGridCell">
         <Setter Property="Background" Value="#FF373737"/>
         <Setter Property="Foreground" Value="#FFDFDFDF"/>
+    </Style>
 
+    <Style TargetType="ListView">
+        <Setter Property="Background" Value="#00000000"/>
+        <Setter Property="BorderBrush" Value="#00000000"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="borderProducts">
+        <Setter Property="Background" Value="#FFBBB8B8"/>
+        <Setter Property="BorderBrush" Value="White"/>
     </Style>
 
     <Style TargetType="Button">

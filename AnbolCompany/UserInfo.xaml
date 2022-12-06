@@ -9,12 +9,16 @@
       Title="UserInfo">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="301*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="41*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Image x:Name="image" Width="200" HorizontalAlignment="Left" Style="{DynamicResource peopleImage}" MouseUp="image_MouseUp"/>
+        <Image x:Name="image" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource peopleImage}" MouseUp="image_MouseUp"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="1">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="lastname" IsEnabled="False" Background="#00000000" BorderBrush="#00000000" FontSize="20" Margin="30 30 0 0"/>
@@ -35,14 +39,14 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <TextBlock x:Name="loginText" Text="Нажмите чтобы увидеть логин" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="1" Margin="30 47 0 0" MouseUp="TextBlock_MouseUp"/>
-        <TextBlock x:Name="passwordText" Text="Нажмите чтобы увидеть пароль" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="1" Margin="30 75 0 0" MouseUp="passwordText_MouseUp"/>
-        <StackPanel Grid.Row="1">
+        <TextBlock x:Name="loginText" Text="Нажмите чтобы увидеть логин" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="1" Margin="30 47 0 0" MouseUp="TextBlock_MouseUp" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="passwordText" Text="Нажмите чтобы увидеть пароль" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="1" Margin="30 75 0 0" MouseUp="passwordText_MouseUp" Grid.ColumnSpan="2"/>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
             <TextBlock Text="Логин и пароль:" Margin="30 0 0 0" FontSize="20"/>
             <TextBox x:Name="login" Visibility="Hidden" IsEnabled="False" HorizontalAlignment="Left" Background="#00000000" BorderBrush="#00000000" Margin="30 20 0 0"/>
             <TextBox x:Name="password" Visibility="Hidden" IsEnabled="False" HorizontalAlignment="Left" Background="#00000000" BorderBrush="#00000000" Margin="30 10 0 0"/>
         </StackPanel>
-        <TextBlock x:Name="infoMessage" Grid.Row="1"  HorizontalAlignment="Center" Foreground="Red" VerticalAlignment="Center" Margin="0 60 0 0"/>
-        <Button x:Name="confirm" Content="Подтвердить" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 10 10" Height="30" Width="100" Click="confirm_Click"/>
+        <TextBlock x:Name="infoMessage" Grid.Row="1"  HorizontalAlignment="Left" Foreground="Red" VerticalAlignment="Top" Margin="202,145,0,0" Grid.Column="1"/>
+        <Button x:Name="confirm" Content="Подтвердить" Visibility="Collapsed" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 10 10" Height="30" Width="100" Click="confirm_Click" Grid.Column="1"/>
     </Grid>
 </Page>

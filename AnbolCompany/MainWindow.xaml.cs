@@ -80,11 +80,17 @@ namespace AnbolCompany
 
         private void frame_Navigated(object sender, NavigationEventArgs e)
         {
-            if(frame.Content.ToString().Equals("AnbolCompany.UserInfo"))
+            if (frame.Content.ToString().Equals("AnbolCompany.UserInfo"))
                 editImage.Visibility = Visibility.Visible;
+            else if (frame.Content.ToString().Equals("AnbolCompany.Products"))
+            {
+                editImage.Visibility = Visibility.Visible;
+                plusImage.Visibility = Visibility.Visible;
+            }
             else
             {
                 editImage.Visibility = Visibility.Collapsed;
+                plusImage.Visibility = Visibility.Collapsed;
             }
         }
     }
