@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Кол-во элементов" Margin="10 0 0 0"/>
-                <ComboBox x:Name="quantity" Margin="10 0 0 0">
+                <ComboBox x:Name="quantity" Margin="10 0 0 0" SelectionChanged="quantity_SelectionChanged">
                     <ComboBoxItem Tag="0" Content="Все"/>
                     <ComboBoxItem Tag="1" Content="2"/>
                     <ComboBoxItem Tag="2" Content="5"/>
@@ -80,6 +80,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Width="800" Grid.Row="1">
+            
+        </StackPanel> 
+        <TextBlock x:Name="thisPage" Text="Текущая страница: " HorizontalAlignment="Right" Margin="0 0 60 2" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Button Content="&lt;" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="40" Height="20" Grid.Row="1" Click="Button_Click"/>
+        <Button Content="&gt;" HorizontalAlignment="Right" Width="40" Height="20" Grid.Row="1" VerticalAlignment="Bottom" Click="Button_Click_1"/>
     </Grid>
 </Page>

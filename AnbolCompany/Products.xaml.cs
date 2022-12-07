@@ -1,6 +1,7 @@
 ﻿using AnbolCompany.Resourses;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,9 @@ namespace AnbolCompany
     /// </summary>
     public partial class Products : Page
     {
-
+        static int thisPage1 = 1;
+        CollectionView products { get; set; }
+        
         public static Products Instance { get; set; }
         public Products()
         {
@@ -30,6 +33,7 @@ namespace AnbolCompany
 
             Instance = this;
 
+            products = (CollectionView)CollectionViewSource.GetDefaultView(listProducts.ItemsSource);
             quantity.SelectedIndex = 0;
             filtration.SelectedIndex = 0;
             sorting.SelectedIndex = 0;
@@ -60,6 +64,26 @@ namespace AnbolCompany
             {
                 MainWindow.Instance.frame.Navigate(new EditProduct(listProducts.SelectedItem as Product));
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void quantity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        void Update()
+        {
+            
         }
     }
 }
