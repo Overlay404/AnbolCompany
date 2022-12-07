@@ -17,7 +17,7 @@ namespace AnbolCompany.Resourses
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Country()
         {
-            this.ProductCountries = new HashSet<ProductCountry>();
+            this.Products = new HashSet<Product>();
         }
     
         public int id { get; set; }
@@ -25,6 +25,6 @@ namespace AnbolCompany.Resourses
         public string color { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductCountry> ProductCountries { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

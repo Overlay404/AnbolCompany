@@ -100,28 +100,13 @@
     <Compile Include="Resourses\Order.cs">
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
-    <Compile Include="Resourses\OrderProduct.cs">
-      <DependentUpon>Anbol.tt</DependentUpon>
-    </Compile>
     <Compile Include="Resourses\Product.cs">
-      <DependentUpon>Anbol.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Resourses\ProductCountry.cs">
-      <DependentUpon>Anbol.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Resourses\ProductSupply.cs">
-      <DependentUpon>Anbol.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Resourses\Provider.cs">
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
     <Compile Include="Resourses\RoleId.cs">
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
     <Compile Include="Resourses\Stage.cs">
-      <DependentUpon>Anbol.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Resourses\Supply.cs">
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
     <Compile Include="Resourses\Unit.cs">
@@ -227,7 +212,6 @@
     <Resource Include="Image\plusImageWhite.png" />
     <Resource Include="Image\editImageBlack.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Resourses\Anbol.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

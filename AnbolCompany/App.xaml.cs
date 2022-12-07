@@ -18,10 +18,11 @@ namespace AnbolCompany
         public static AnbolEntities db = new AnbolEntities();
 
         public static User user { get; set; }
-        public static Products product { get; set; }
+        public static Product product { get; set; }
         public App()
         {
             db.Users.Load();
+            db.Products.Load();
         }
     }
 }

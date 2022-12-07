@@ -22,27 +22,44 @@ namespace AnbolCompany
     /// </summary>
     public partial class Products : Page
     {
+
+        public static Products Instance { get; set; }
         public Products()
         {
             InitializeComponent();
+
+            Instance = this;
 
             quantity.SelectedIndex = 0;
             filtration.SelectedIndex = 0;
             sorting.SelectedIndex = 0;
 
             listProducts.ItemsSource = App.db.Products.ToList();
-            foreach (var entity in listProducts.Items)
+
+            MainWindow.Instance.plusImage.MouseUp += PlusImage_MouseUp;
+            MainWindow.Instance.editImage.MouseUp += EditImage_MouseUp;
+        }
+
+        private void EditImage_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (MainWindow.Instance.frame.Content.ToString().Equals("AnbolCompany.Products"))
             {
-                if ((entity as Product).count < 0)
+                if (listProducts.SelectedItem != null)
                 {
-                    (entity as ListViewItem).Background = new SolidColorBrush(Colors.Blue);
+                    MainWindow.Instance.frame.Navigate(new EditProduct(listProducts.SelectedItem as Product));
+                    App.product = (listProducts.SelectedItem as Product);
                 }
+                else
+                    MessageBox.Show("Нет выбраного элемента");
             }
         }
 
-        private void listProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void PlusImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("" + (listProducts.SelectedItem as Product).nameProduct);
+            if (MainWindow.Instance.frame.Content.ToString().Equals("AnbolCompany.Products"))
+            {
+                MainWindow.Instance.frame.Navigate(new EditProduct(listProducts.SelectedItem as Product));
+            }
         }
     }
 }

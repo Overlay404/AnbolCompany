@@ -28,14 +28,9 @@ namespace AnbolCompany.Resourses
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductCountry> ProductCountries { get; set; }
-        public virtual DbSet<ProductSupply> ProductSupplies { get; set; }
-        public virtual DbSet<Provider> Providers { get; set; }
         public virtual DbSet<RoleId> RoleIds { get; set; }
         public virtual DbSet<Stage> Stages { get; set; }
-        public virtual DbSet<Supply> Supplies { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

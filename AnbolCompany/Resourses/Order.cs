@@ -17,7 +17,7 @@ namespace AnbolCompany.Resourses
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderProducts = new HashSet<OrderProduct>();
+            this.Products = new HashSet<Product>();
         }
     
         public int id { get; set; }
@@ -30,6 +30,6 @@ namespace AnbolCompany.Resourses
         public virtual RoleId RoleId1 { get; set; }
         public virtual Stage Stage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
