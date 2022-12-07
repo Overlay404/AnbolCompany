@@ -10,14 +10,14 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="120*"/>
             <ColumnDefinition Width="301*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="41*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <Image x:Name="image" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource peopleImage}" MouseUp="image_MouseUp"/>
+        <Image x:Name="image" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="20 20 0 0" Style="{DynamicResource peopleImage}" MouseUp="image_MouseUp"/>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.Column="1">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">

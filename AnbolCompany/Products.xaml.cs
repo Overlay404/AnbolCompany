@@ -13,17 +13,14 @@ namespace AnbolCompany
     /// </summary>
     public partial class Products : Page
     {
-        static int thisPage1 = 1;
         CollectionView products { get; set; }
-
+        public static int currentPage = 1;
         public static Products Instance { get; set; }
         public Products()
         {
             InitializeComponent();
 
             Instance = this;
-
-            listProducts.ItemsSource = App.db.Products.ToList();
 
             quantity.SelectedIndex = 0;
             filtration.SelectedIndex = 0;
@@ -46,35 +43,56 @@ namespace AnbolCompany
                 else
                     MessageBox.Show("Нет выбраного элемента");
             }
+        
         }
 
         private void PlusImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (MainWindow.Instance.frame.Content.ToString().Equals("AnbolCompany.Products"))
             {
-                MainWindow.Instance.frame.Navigate(new EditProduct(listProducts.SelectedItem as Product));
+                MainWindow.Instance.frame.Navigate(new EditProduct(null));
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            currentPage--;
+            Update();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            currentPage++;
+            Update();
         }
 
         private void quantity_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Update();
         }
 
         void Update()
         {
+            switch ((quantity.SelectedItem as ComboBoxItem).Tag)
+            {
+                case "1":
+                    listProducts.ItemsSource = .Skip(2 * currentPage).Take(2);
+                    break;
+                case "2":
+                    listProducts.ItemsSource = App.db.Products.ToList().Skip(5 * currentPage).Take(5);
+                    break;
+                case "3":
+                    listProducts.ItemsSource = App.db.Products.ToList().Skip(10 * currentPage).Take(10);
+                    break;
+                default:
+                    listProducts.ItemsSource = App.db.Products.ToList();
+                    break;
+            }
+
             products = (CollectionView)CollectionViewSource.GetDefaultView(listProducts.ItemsSource);
             products.SortDescriptions.Add(new SortDescription("nameProduct", ListSortDirection.Ascending));
+
+            thisPage.Text = currentPage.ToString();
         }
     }
 }

@@ -23,13 +23,20 @@ namespace AnbolCompany
     /// </summary>
     public partial class EditProduct : Page
     {
+        public static EditProduct Instance { get; set; }
+        byte[] photoPath = null;
+        Product product1;
         public EditProduct(Product product)
         {
             InitializeComponent();
 
+            Instance = this;
+
+            product1 = product;
+
             meaning.ItemsSource = App.db.Units.Select(u => u.meaning).ToList();
 
-            if (Products.Instance.listProducts.SelectedItem != null)
+            if (product != null)
             {
                 nameProduct.Text = product.nameProduct;
                 description.Text = product.description;
@@ -37,6 +44,13 @@ namespace AnbolCompany
                 cost.Text = product.cost.ToString();
                 date.Text = product.date.ToString();
                 meaning.SelectedIndex = product.UnitId - 1;
+                if (product.photoPath != null)
+                    image.Source = BitmapFrame.Create( new MemoryStream(product.photoPath), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                country.ItemsSource = App.db.Countries.ToList();
+                foreach (var item in product.Countries)
+                {
+                    country.SelectedItems.Add(item);
+                }
             }
         }
 
@@ -49,34 +63,47 @@ namespace AnbolCompany
             };
             if (openFile.ShowDialog().GetValueOrDefault())
             {
-                App.product.photoPath = File.ReadAllBytes(openFile.FileName);
+                image.Source = BitmapFrame.Create(new MemoryStream(File.ReadAllBytes(openFile.FileName)), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                photoPath = File.ReadAllBytes(openFile.FileName);
             }
-            image.Source = BitmapFrame.Create(new MemoryStream(App.product.photoPath), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Products.Instance.listProducts.SelectedItem != null) {
-                App.product.nameProduct = nameProduct.Text;
-                App.product.description = description.Text;
-                App.product.count = int.Parse(cost.Text);
-                App.product.cost = int.Parse(cost.Text);
-                App.product.date = DateTime.Parse(date.Text);
-                App.product.UnitId = meaning.SelectedIndex + 1;
+            if (nameProduct.Text.Length > 0 && description.Text.Length > 0 && cost.Text.All(c => char.IsDigit(c)) && cost.Text.Length > 0 && count.Text.All(c => char.IsDigit(c)) && count.Text.Length > 0 && date.Text.Length > 0 && meaning.SelectedItem != null)
+            {
+                if (EditProduct.Instance.product1 != null)
+                {
+                    App.product.nameProduct = nameProduct.Text;
+                    App.product.description = description.Text;
+                    App.product.count = int.Parse(cost.Text);
+                    App.product.cost = int.Parse(cost.Text);
+                    App.product.date = DateTime.Parse(date.Text);
+                    App.product.UnitId = meaning.SelectedIndex + 1;
+                    if (photoPath != null)
+                        App.product.photoPath = photoPath;
+                }
+                else
+                {
+                    App.db.Products.Add(new Product
+                    {
+                        nameProduct = nameProduct.Text,
+                        description = description.Text,
+                        cost = int.Parse(cost.Text),
+                        date = DateTime.Parse(date.Text),
+                        count = int.Parse(cost.Text),
+                        UnitId = meaning.SelectedIndex + 1,
+                        photoPath = photoPath
+                    });
+                }
             }
             else
             {
-                App.db.Products.Add(new Product
-                    {
-                    nameProduct = nameProduct.Text,
-                    description = description.Text,
-                    cost = int.Parse(cost.Text),
-                    date = DateTime.Parse(date.Text),
-                    count = int.Parse(cost.Text),
-                    UnitId = meaning.SelectedIndex + 1
-                });
+                MessageBox.Show("Не все поля заполнены или не соответствуют формату ввода");
+                return;
             }
             App.db.SaveChanges();
+            MainWindow.Instance.frame.Navigate(new Products());
         }
     }
 }

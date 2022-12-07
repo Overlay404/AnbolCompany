@@ -45,7 +45,7 @@
             <TextBlock Text="Поиск"/>
             <TextBox x:Name="search" Width="300" Height="20" Margin="10 0 10 0"/>
         </StackPanel>
-        <ListView x:Name="listProducts" Grid.Row="1" Margin="10 0 10 10" d:ItemsSource="{d:SampleData ItemCount=3}">
+        <ListView x:Name="listProducts" Grid.Row="1" Margin="10 0 10 35" d:ItemsSource="{d:SampleData ItemCount=3}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="5" CornerRadius="10" BorderThickness="2" Style="{DynamicResource borderProducts}">
@@ -59,7 +59,7 @@
                                 <RowDefinition Height="40"/>
                                 <RowDefinition Height="25"/>
                             </Grid.RowDefinitions>
-                            <Image Grid.RowSpan="3" Grid.Column="0" Source="{Binding Path=photoPath}" Margin="2,0,2,0"/>
+                            <Image Grid.RowSpan="3" Grid.Column="0" Source="{Binding photoPath, TargetNullValue={x:Null}}" Margin="2,0,2,0"/>
                             <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Text="{Binding Path=date, StringFormat=d}" Margin="0 0 10 0"/>
                             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                                 <TextBlock Text="{Binding Path=nameProduct}" FontSize="16"/>
@@ -82,9 +82,9 @@
         </ListView>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Width="800" Grid.Row="1">
             
-        </StackPanel> 
-        <TextBlock x:Name="thisPage" Text="Текущая страница: " HorizontalAlignment="Right" Margin="0 0 60 2" Grid.Row="1" VerticalAlignment="Bottom"/>
-        <Button Content="&lt;" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="40" Height="20" Grid.Row="1" Click="Button_Click"/>
-        <Button Content="&gt;" HorizontalAlignment="Right" Width="40" Height="20" Grid.Row="1" VerticalAlignment="Bottom" Click="Button_Click_1"/>
+        </StackPanel>
+        <TextBlock x:Name="thisPage" Text="Текущая страница: " HorizontalAlignment="Right" Margin="0 0 60 7" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Button Content="&lt;" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0 0 0 5" Width="40" Height="20" Grid.Row="1" Click="Button_Click"/>
+        <Button Content="&gt;" HorizontalAlignment="Right" Width="40" Height="20" Margin="0 0 0 5" Grid.Row="1" VerticalAlignment="Bottom" Click="Button_Click_1"/>
     </Grid>
 </Page>
