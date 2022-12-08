@@ -57,7 +57,7 @@ namespace AnbolCompany
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.Navigate(new Order());
         }
         private void Info_Click(object sender, RoutedEventArgs e)
         {

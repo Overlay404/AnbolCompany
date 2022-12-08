@@ -16,7 +16,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Кол-во элементов" Margin="10 0 0 0"/>
-                <ComboBox x:Name="quantity" Margin="10 0 0 0" SelectionChanged="quantity_SelectionChanged">
+                <ComboBox x:Name="quantity" Margin="10 0 10 0" SelectionChanged="quantity_SelectionChanged">
                     <ComboBoxItem Tag="0" Content="Все"/>
                     <ComboBoxItem Tag="1" Content="2"/>
                     <ComboBoxItem Tag="2" Content="5"/>
@@ -25,7 +25,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Фильтрация"/>
-                <ComboBox x:Name="filtration" Margin="10 0 0 0">
+                <ComboBox x:Name="filtration" Margin="10 0 10 0" SelectionChanged="filtration_SelectionChanged">
                     <ComboBoxItem Tag="0" Content="Все"/>
                     <ComboBoxItem Tag="1" Content="Имя"/>
                     <ComboBoxItem Tag="2" Content="Дата"/>
@@ -34,16 +34,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Сортировка"/>
-                <ComboBox x:Name="sorting" Margin="10 0 0 0">
-                    <ComboBoxItem Tag="0" Content="Все"/>
-                    <ComboBoxItem Tag="1" Content="От а до я"/>
-                    <ComboBoxItem Tag="2" Content="От я до а"/>
+                <ComboBox x:Name="sorting" Margin="10 0 0 0" SelectionChanged="sorting_SelectionChanged">
+                    <ComboBoxItem Tag="0" Content="По возрастанию"/>
+                    <ComboBoxItem Tag="1" Content="По убыванию"/>
                 </ComboBox>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
             <TextBlock Text="Поиск"/>
-            <TextBox x:Name="search" Width="300" Height="20" Margin="10 0 10 0"/>
+            <TextBox x:Name="search" Width="200" Height="20" Margin="10 0 10 0"/>
         </StackPanel>
         <ListView x:Name="listProducts" Grid.Row="1" Margin="10 0 10 35" d:ItemsSource="{d:SampleData ItemCount=3}">
             <ListView.ItemTemplate>

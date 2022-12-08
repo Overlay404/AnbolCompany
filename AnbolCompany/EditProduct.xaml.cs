@@ -23,6 +23,7 @@ namespace AnbolCompany
     /// </summary>
     public partial class EditProduct : Page
     {
+        List<Country> listCountry = new List<Country>();
         public static EditProduct Instance { get; set; }
         byte[] photoPath = null;
         Product product1;
@@ -72,6 +73,9 @@ namespace AnbolCompany
         {
             if (nameProduct.Text.Length > 0 && description.Text.Length > 0 && cost.Text.All(c => char.IsDigit(c)) && cost.Text.Length > 0 && count.Text.All(c => char.IsDigit(c)) && count.Text.Length > 0 && date.Text.Length > 0 && meaning.SelectedItem != null)
             {
+                foreach(var item in country.SelectedItems)
+                    listCountry.Add(new Country { nameCountry = (item as Country).nameCountry.ToString()});
+
                 if (EditProduct.Instance.product1 != null)
                 {
                     App.product.nameProduct = nameProduct.Text;
@@ -82,6 +86,7 @@ namespace AnbolCompany
                     App.product.UnitId = meaning.SelectedIndex + 1;
                     if (photoPath != null)
                         App.product.photoPath = photoPath;
+                    App.product.Countries = listCountry;
                 }
                 else
                 {
@@ -93,7 +98,8 @@ namespace AnbolCompany
                         date = DateTime.Parse(date.Text),
                         count = int.Parse(cost.Text),
                         UnitId = meaning.SelectedIndex + 1,
-                        photoPath = photoPath
+                        photoPath = photoPath,
+                        Countries = listCountry
                     });
                 }
             }
