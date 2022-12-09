@@ -65,10 +65,10 @@
                                 <TextBlock Text="{Binding Path=Unit.meaning}" Margin="4 4 0 0"/>
                             </StackPanel>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=description}"/>
-                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=Countries}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="10 0 0 0">
+                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=Product_Country}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="10 0 0 0">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=nameCountry}"/>
+                                        <TextBlock Text="{Binding Path=Country.nameCountry}"/>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>

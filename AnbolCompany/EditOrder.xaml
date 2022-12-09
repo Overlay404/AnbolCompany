@@ -1,0 +1,77 @@
+﻿<Page x:Class="AnbolCompany.EditOrder"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnbolCompany"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditOrder" Loaded="Page_Loaded">
+
+    <Grid>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+            <TextBlock Text="Все продукты:" Margin="0 0 0 10"/>
+            <ListView x:Name="productList" d:ItemsSource="{d:SampleData ItemCount=4}" Width="700" SelectionChanged="productList_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                        <StackPanel Width="80">
+                            <TextBlock Text="{Binding nameProduct}"/>
+                            <TextBlock Text="{Binding count}"/>
+                            <TextBlock Text="{Binding cost, StringFormat=F}"/>
+                        </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Наименование продукта"/>
+            <TextBox x:Name="nameProduct" Height="20" Width="100" IsEnabled="False" Margin="0 0 10 0"/>
+            <TextBlock Text="Закупочная цена"/>
+                <TextBox x:Name="cost" Margin="0 0 10 0" Width="100"/>
+            <TextBlock Text="Закупочное количество"/>
+                <TextBox x:Name="count" Margin="0 0 10 0" Width="100"/>
+            </StackPanel>
+            <Button x:Name="addBtn" Content="Добавить" HorizontalAlignment="Center" Width="80" Height="30" Margin="0 10 0 0" Click="Button_Click"/>
+
+            <TextBlock Text="Продукты добавленные в заказ:" Margin="0 20 0 10"/>
+
+            <ListView x:Name="productOrderList" d:ItemsSource="{d:SampleData ItemCount=4}" Width="700">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="2">
+                       <StackPanel Width="80">
+                            <TextBlock Text="{Binding Product.nameProduct}"/>
+                            <TextBlock Text="{Binding count}"/>
+                            <TextBlock Text="{Binding cost, StringFormat=F}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+            <TextBlock x:Name="sumOrder" Text="Конечная сумма заказа: "  Margin="0 0 30 0"/>
+            <TextBlock x:Name="countOrder" Text="Конечная сумма заказа: " />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                <Button x:Name="newOrder" Content="Подтвердить" Width="90" Height="25" Margin="0 0 10 0" Click="newOrder_Click"/>
+                <Button x:Name="started" Content="Обрабатывается" Width="100" Height="25" Margin="0 0 10 0" Click="started_Click"/>
+                <Button x:Name="reject" Content="Отклонить" Width="80" Height="25" Margin="0 0 10 0" Click="reject_Click"/>
+                <Button x:Name="payment" Content="К оплате" Width="70" Height="25" Margin="0 0 10 0" Click="payment_Click"/>
+                <Button x:Name="execute" Content="Выполняется" Width="90" Height="25" Margin="0 0 10 0" Click="execute_Click"/>
+                <Button x:Name="ready" Content="Готов" Width="50" Height="25" Click="ready_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

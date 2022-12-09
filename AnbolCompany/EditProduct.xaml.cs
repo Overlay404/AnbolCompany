@@ -23,7 +23,7 @@ namespace AnbolCompany
     /// </summary>
     public partial class EditProduct : Page
     {
-        List<Country> listCountry = new List<Country>();
+        List<Product_Country> listCountry = new List<Product_Country>();
         public static EditProduct Instance { get; set; }
         byte[] photoPath = null;
         Product product1;
@@ -48,10 +48,8 @@ namespace AnbolCompany
                 if (product.photoPath != null)
                     image.Source = BitmapFrame.Create( new MemoryStream(product.photoPath), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                 country.ItemsSource = App.db.Countries.ToList();
-                foreach (var item in product.Countries)
-                {
+                foreach(var item in App.db.Product_Country.Where(p => p.Product.id == product.id).Select(c => c.Country).ToList())
                     country.SelectedItems.Add(item);
-                }
             }
         }
 
@@ -74,9 +72,9 @@ namespace AnbolCompany
             if (nameProduct.Text.Length > 0 && description.Text.Length > 0 && cost.Text.All(c => char.IsDigit(c)) && cost.Text.Length > 0 && count.Text.All(c => char.IsDigit(c)) && count.Text.Length > 0 && date.Text.Length > 0 && meaning.SelectedItem != null)
             {
                 foreach(var item in country.SelectedItems)
-                    listCountry.Add(new Country { nameCountry = (item as Country).nameCountry.ToString()});
+                    listCountry.Add(new Product_Country { CountryId = (item as Country).id, ProductId = product1.id });
 
-                if (EditProduct.Instance.product1 != null)
+                if (product1 != null)
                 {
                     App.product.nameProduct = nameProduct.Text;
                     App.product.description = description.Text;
@@ -86,7 +84,7 @@ namespace AnbolCompany
                     App.product.UnitId = meaning.SelectedIndex + 1;
                     if (photoPath != null)
                         App.product.photoPath = photoPath;
-                    App.product.Countries = listCountry;
+                    App.product.Product_Country = listCountry;
                 }
                 else
                 {
@@ -99,7 +97,7 @@ namespace AnbolCompany
                         count = int.Parse(cost.Text),
                         UnitId = meaning.SelectedIndex + 1,
                         photoPath = photoPath,
-                        Countries = listCountry
+                        Product_Country = listCountry
                     });
                 }
             }

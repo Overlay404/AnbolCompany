@@ -12,19 +12,15 @@ namespace AnbolCompany.Resourses
     using System;
     using System.Collections.Generic;
     
-    public partial class Country
+    public partial class Order_Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Country()
-        {
-            this.Product_Country = new HashSet<Product_Country>();
-        }
-    
         public int id { get; set; }
-        public string nameCountry { get; set; }
-        public string color { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public Nullable<int> OrderId { get; set; }
+        public Nullable<int> count { get; set; }
+        public Nullable<int> cost { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Country> Product_Country { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

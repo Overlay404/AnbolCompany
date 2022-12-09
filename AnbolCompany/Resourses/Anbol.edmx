@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище AnbolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище AnbolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="id" />
@@ -32,11 +32,13 @@
         </EntityType>
         <EntityType Name="Order_Product">
           <Key>
-            <PropertyRef Name="ProductId" />
-            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="count" Type="int" />
+          <Property Name="cost" Type="int" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -53,11 +55,11 @@
         </EntityType>
         <EntityType Name="Product_Country">
           <Key>
-            <PropertyRef Name="ProductId" />
-            <PropertyRef Name="CountryId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="CountryId" Type="int" />
         </EntityType>
         <EntityType Name="RoleId">
           <Key>
@@ -133,7 +135,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderProduct_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Order_Product" Type="Self.Order_Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -145,7 +147,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderProduct_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Order_Product" Type="Self.Order_Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -169,7 +171,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductCountry_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
           <End Role="Product_Country" Type="Self.Product_Country" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
@@ -181,7 +183,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductCountry_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Product_Country" Type="Self.Product_Country" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -268,11 +270,62 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AnbolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AnbolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Countries" EntityType="AnbolModel.Country" />
+          <EntitySet Name="Genders" EntityType="AnbolModel.Gender" />
+          <EntitySet Name="Orders" EntityType="AnbolModel.Order" />
+          <EntitySet Name="Order_Product" EntityType="AnbolModel.Order_Product" />
+          <EntitySet Name="Products" EntityType="AnbolModel.Product" />
+          <EntitySet Name="Product_Country" EntityType="AnbolModel.Product_Country" />
+          <EntitySet Name="RoleIds" EntityType="AnbolModel.RoleId" />
+          <EntitySet Name="Stages" EntityType="AnbolModel.Stage" />
+          <EntitySet Name="Units" EntityType="AnbolModel.Unit" />
+          <EntitySet Name="Users" EntityType="AnbolModel.User" />
+          <AssociationSet Name="FK_ProductCountry_Country" Association="AnbolModel.FK_ProductCountry_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Product_Country" EntitySet="Product_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Gender" Association="AnbolModel.FK_User_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_RoleId" Association="AnbolModel.FK_Order_RoleId">
+            <End Role="RoleId" EntitySet="RoleIds" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_RoleId1" Association="AnbolModel.FK_Order_RoleId1">
+            <End Role="RoleId" EntitySet="RoleIds" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Stage" Association="AnbolModel.FK_Order_Stage">
+            <End Role="Stage" EntitySet="Stages" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Order" Association="AnbolModel.FK_OrderProduct_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Order_Product" EntitySet="Order_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Product" Association="AnbolModel.FK_OrderProduct_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Order_Product" EntitySet="Order_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Unit" Association="AnbolModel.FK_Product_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCountry_Product" Association="AnbolModel.FK_ProductCountry_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Country" EntitySet="Product_Country" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_RoleId" Association="AnbolModel.FK_User_RoleId">
+            <End Role="RoleId" EntitySet="RoleIds" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="id" />
@@ -280,7 +333,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="Self.Product_Country" FromRole="Country" ToRole="Product" />
+          <NavigationProperty Name="Product_Country" Relationship="AnbolModel.FK_ProductCountry_Country" FromRole="Country" ToRole="Product_Country" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -288,7 +341,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Gender" FromRole="Gender" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="AnbolModel.FK_User_Gender" FromRole="Gender" ToRole="User" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -299,10 +352,22 @@
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="ExecutorId" Type="Int32" />
           <Property Name="StageId" Type="Int32" />
-          <NavigationProperty Name="RoleId" Relationship="Self.FK_Order_RoleId" FromRole="Order" ToRole="RoleId" />
-          <NavigationProperty Name="RoleId1" Relationship="Self.FK_Order_RoleId1" FromRole="Order" ToRole="RoleId" />
-          <NavigationProperty Name="Stage" Relationship="Self.FK_Order_Stage" FromRole="Order" ToRole="Stage" />
-          <NavigationProperty Name="Products" Relationship="Self.Order_Product" FromRole="Order" ToRole="Product" />
+          <NavigationProperty Name="RoleId" Relationship="AnbolModel.FK_Order_RoleId" FromRole="Order" ToRole="RoleId" />
+          <NavigationProperty Name="RoleId1" Relationship="AnbolModel.FK_Order_RoleId1" FromRole="Order" ToRole="RoleId" />
+          <NavigationProperty Name="Stage" Relationship="AnbolModel.FK_Order_Stage" FromRole="Order" ToRole="Stage" />
+          <NavigationProperty Name="Order_Product" Relationship="AnbolModel.FK_OrderProduct_Order" FromRole="Order" ToRole="Order_Product" />
+        </EntityType>
+        <EntityType Name="Order_Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="count" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="AnbolModel.FK_OrderProduct_Order" FromRole="Order_Product" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="AnbolModel.FK_OrderProduct_Product" FromRole="Order_Product" ToRole="Product" />
+          <Property Name="cost" Type="Int32" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -316,9 +381,19 @@
           <Property Name="photoPath" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UnitId" Type="Int32" Nullable="false" />
           <Property Name="cost" Type="Int32" />
-          <NavigationProperty Name="Unit" Relationship="Self.FK_Product_Unit" FromRole="Product" ToRole="Unit" />
-          <NavigationProperty Name="Orders" Relationship="Self.Order_Product" FromRole="Product" ToRole="Order" />
-          <NavigationProperty Name="Countries" Relationship="Self.Product_Country" FromRole="Product" ToRole="Country" />
+          <NavigationProperty Name="Order_Product" Relationship="AnbolModel.FK_OrderProduct_Product" FromRole="Product" ToRole="Order_Product" />
+          <NavigationProperty Name="Unit" Relationship="AnbolModel.FK_Product_Unit" FromRole="Product" ToRole="Unit" />
+          <NavigationProperty Name="Product_Country" Relationship="AnbolModel.FK_ProductCountry_Product" FromRole="Product" ToRole="Product_Country" />
+        </EntityType>
+        <EntityType Name="Product_Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="Country" Relationship="AnbolModel.FK_ProductCountry_Country" FromRole="Product_Country" ToRole="Country" />
+          <NavigationProperty Name="Product" Relationship="AnbolModel.FK_ProductCountry_Product" FromRole="Product_Country" ToRole="Product" />
         </EntityType>
         <EntityType Name="RoleId">
           <Key>
@@ -326,9 +401,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_RoleId" FromRole="RoleId" ToRole="Order" />
-          <NavigationProperty Name="Orders1" Relationship="Self.FK_Order_RoleId1" FromRole="RoleId" ToRole="Order" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_RoleId" FromRole="RoleId" ToRole="User" />
+          <NavigationProperty Name="Orders" Relationship="AnbolModel.FK_Order_RoleId" FromRole="RoleId" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="AnbolModel.FK_Order_RoleId1" FromRole="RoleId" ToRole="Order" />
+          <NavigationProperty Name="Users" Relationship="AnbolModel.FK_User_RoleId" FromRole="RoleId" ToRole="User" />
         </EntityType>
         <EntityType Name="Stage">
           <Key>
@@ -336,7 +411,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameStage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Stage" FromRole="Stage" ToRole="Order" />
+          <NavigationProperty Name="Orders" Relationship="AnbolModel.FK_Order_Stage" FromRole="Stage" ToRole="Order" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -344,7 +419,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="meaning" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Unit" FromRole="Unit" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="AnbolModel.FK_Product_Unit" FromRole="Unit" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -361,12 +436,24 @@
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GenderId" Type="Int32" />
           <Property Name="photoPath" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_User_Gender" FromRole="User" ToRole="Gender" />
-          <NavigationProperty Name="RoleId1" Relationship="Self.FK_User_RoleId" FromRole="User" ToRole="RoleId" />
+          <NavigationProperty Name="Gender" Relationship="AnbolModel.FK_User_Gender" FromRole="User" ToRole="Gender" />
+          <NavigationProperty Name="RoleId1" Relationship="AnbolModel.FK_User_RoleId" FromRole="User" ToRole="RoleId" />
         </EntityType>
+        <Association Name="FK_ProductCountry_Country">
+          <End Type="AnbolModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="AnbolModel.Product_Country" Role="Product_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product_Country">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="AnbolModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="AnbolModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="id" />
@@ -377,8 +464,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_RoleId">
-          <End Role="RoleId" Type="Self.RoleId" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="AnbolModel.RoleId" Role="RoleId" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RoleId">
               <PropertyRef Name="id" />
@@ -389,8 +476,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_RoleId1">
-          <End Role="RoleId" Type="Self.RoleId" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="AnbolModel.RoleId" Role="RoleId" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RoleId">
               <PropertyRef Name="id" />
@@ -401,8 +488,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Stage">
-          <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="AnbolModel.Stage" Role="Stage" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Stage">
               <PropertyRef Name="id" />
@@ -412,9 +499,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderProduct_Order">
+          <End Type="AnbolModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order_Product" Role="Order_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order_Product">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Product">
+          <End Type="AnbolModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order_Product" Role="Order_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order_Product">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Unit">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="AnbolModel.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="AnbolModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Unit">
               <PropertyRef Name="id" />
@@ -424,9 +535,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCountry_Product">
+          <End Type="AnbolModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="AnbolModel.Product_Country" Role="Product_Country" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product_Country">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_RoleId">
-          <End Role="RoleId" Type="Self.RoleId" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="AnbolModel.RoleId" Role="RoleId" Multiplicity="0..1" />
+          <End Type="AnbolModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RoleId">
               <PropertyRef Name="id" />
@@ -436,56 +559,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Order_Product">
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-        </Association>
-        <Association Name="Product_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="*" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="AnbolEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="Genders" EntityType="Self.Gender" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="RoleIds" EntityType="Self.RoleId" />
-          <EntitySet Name="Stages" EntityType="Self.Stage" />
-          <EntitySet Name="Units" EntityType="Self.Unit" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_User_Gender" Association="Self.FK_User_Gender">
-            <End Role="Gender" EntitySet="Genders" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_RoleId" Association="Self.FK_Order_RoleId">
-            <End Role="RoleId" EntitySet="RoleIds" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_RoleId1" Association="Self.FK_Order_RoleId1">
-            <End Role="RoleId" EntitySet="RoleIds" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Stage" Association="Self.FK_Order_Stage">
-            <End Role="Stage" EntitySet="Stages" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Unit" Association="Self.FK_Product_Unit">
-            <End Role="Unit" EntitySet="Units" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_RoleId" Association="Self.FK_User_RoleId">
-            <End Role="RoleId" EntitySet="RoleIds" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="Order_Product" Association="Self.Order_Product">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="Product_Country" Association="Self.Product_Country">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -495,102 +568,106 @@
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="AnbolModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nameCountry" ColumnName="nameCountry" />
                 <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="nameCountry" ColumnName="nameCountry" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Genders">
             <EntityTypeMapping TypeName="AnbolModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="AnbolModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ExecutorId" ColumnName="ExecutorId" />
                 <ScalarProperty Name="StageId" ColumnName="StageId" />
+                <ScalarProperty Name="ExecutorId" ColumnName="ExecutorId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Product">
+            <EntityTypeMapping TypeName="AnbolModel.Order_Product">
+              <MappingFragment StoreEntitySet="Order_Product">
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AnbolModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="count" ColumnName="count" />
-                <ScalarProperty Name="photoPath" ColumnName="photoPath" />
-                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="photoPath" ColumnName="photoPath" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Country">
+            <EntityTypeMapping TypeName="AnbolModel.Product_Country">
+              <MappingFragment StoreEntitySet="Product_Country">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleIds">
             <EntityTypeMapping TypeName="AnbolModel.RoleId">
               <MappingFragment StoreEntitySet="RoleId">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stages">
             <EntityTypeMapping TypeName="AnbolModel.Stage">
               <MappingFragment StoreEntitySet="Stage">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nameStage" ColumnName="nameStage" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="AnbolModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="meaning" ColumnName="meaning" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AnbolModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="firstname" ColumnName="firstname" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
                 <ScalarProperty Name="photoPath" ColumnName="photoPath" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Order_Product" TypeName="AnbolModel.Order_Product" StoreEntitySet="Order_Product">
-            <EndProperty Name="Order">
-              <ScalarProperty Name="id" ColumnName="OrderId" />
-            </EndProperty>
-            <EndProperty Name="Product">
-              <ScalarProperty Name="id" ColumnName="ProductId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Product_Country" TypeName="AnbolModel.Product_Country" StoreEntitySet="Product_Country">
-            <EndProperty Name="Country">
-              <ScalarProperty Name="id" ColumnName="CountryId" />
-            </EndProperty>
-            <EndProperty Name="Product">
-              <ScalarProperty Name="id" ColumnName="ProductId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

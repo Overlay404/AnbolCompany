@@ -57,7 +57,7 @@ namespace AnbolCompany
 
         private void Order_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new Order());
+            frame.Navigate(new OrderPage());
         }
         private void Info_Click(object sender, RoutedEventArgs e)
         {
@@ -68,12 +68,15 @@ namespace AnbolCompany
         {
             if (AuthRegist.Authorization.isAuth)
             {
-                AuthRegist.Authorization.isAuth = false;
-                AuthRegist.Authorization.checkAuthorizationUser(AuthRegist.Authorization.isAuth);
+                if (MessageBox.Show("Вы хотите выйти из аккаунта ?", "Выйти", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    AuthRegist.Authorization.isAuth = false;
+                    AuthRegist.Authorization.checkAuthorizationUser(AuthRegist.Authorization.isAuth);
+                }
             }
             else
             {
-                if(MessageBox.Show("Вы хотите выйти из приложения?", "Выйти", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if(MessageBox.Show("Вы хотите выйти из приложения ?", "Выйти", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     this.Close();
             }
         }
@@ -81,8 +84,16 @@ namespace AnbolCompany
         private void frame_Navigated(object sender, NavigationEventArgs e)
         {
             if (frame.Content.ToString().Equals("AnbolCompany.UserInfo"))
+            {
                 editImage.Visibility = Visibility.Visible;
+                plusImage.Visibility = Visibility.Collapsed;
+            }
             else if (frame.Content.ToString().Equals("AnbolCompany.Products"))
+            {
+                editImage.Visibility = Visibility.Visible;
+                plusImage.Visibility = Visibility.Visible;
+            }
+            else if (frame.Content.ToString().Equals("AnbolCompany.OrderPage"))
             {
                 editImage.Visibility = Visibility.Visible;
                 plusImage.Visibility = Visibility.Visible;

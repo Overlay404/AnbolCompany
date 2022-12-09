@@ -17,8 +17,8 @@ namespace AnbolCompany.Resourses
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Orders = new HashSet<Order>();
-            this.Countries = new HashSet<Country>();
+            this.Order_Product = new HashSet<Order_Product>();
+            this.Product_Country = new HashSet<Product_Country>();
         }
     
         public int id { get; set; }
@@ -30,10 +30,10 @@ namespace AnbolCompany.Resourses
         public int UnitId { get; set; }
         public Nullable<int> cost { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Product> Order_Product { get; set; }
         public virtual Unit Unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Country> Countries { get; set; }
+        public virtual ICollection<Product_Country> Product_Country { get; set; }
     }
 }

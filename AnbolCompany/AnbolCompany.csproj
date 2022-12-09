@@ -70,6 +70,9 @@
     <Compile Include="AuthRegist\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditOrder.xaml.cs">
+      <DependentUpon>EditOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditProduct.xaml.cs">
       <DependentUpon>EditProduct.xaml</DependentUpon>
     </Compile>
@@ -103,7 +106,13 @@
     <Compile Include="Resourses\Order.cs">
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
+    <Compile Include="Resourses\Order_Product.cs">
+      <DependentUpon>Anbol.tt</DependentUpon>
+    </Compile>
     <Compile Include="Resourses\Product.cs">
+      <DependentUpon>Anbol.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Resourses\Product_Country.cs">
       <DependentUpon>Anbol.tt</DependentUpon>
     </Compile>
     <Compile Include="Resourses\RoleId.cs">
@@ -124,6 +133,10 @@
     </Compile>
     <Compile Include="VisibleRadiuButton.cs" />
     <Page Include="AuthRegist\Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,6 +19,9 @@ namespace AnbolCompany
 
         public static User user { get; set; }
         public static Product product { get; set; }
+
+        public static Order_Product order_product { get; set; }
+        public static Order order { get; set; }
         public App()
         {
             db.Users.Load();
