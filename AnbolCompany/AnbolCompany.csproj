@@ -243,6 +243,7 @@
     <Resource Include="Image\editImageBlack.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\icons.bmp" />
     <Content Include="Resourses\Anbol.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Anbol.edmx</DependentUpon>

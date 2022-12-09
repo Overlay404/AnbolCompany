@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnbolCompany"
         mc:Ignorable="d"
-        Title="AnbolCompany" Height="450" Width="800">
+        Title="AnbolCompany" Height="450" Width="800" Icon="\Image\icons.bmp">
 
     <Grid Style="{DynamicResource StyleGrid}">
         <Grid.RowDefinitions>

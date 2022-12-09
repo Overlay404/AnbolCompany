@@ -36,6 +36,7 @@ namespace AnbolCompany
             product1 = product;
 
             meaning.ItemsSource = App.db.Units.Select(u => u.meaning).ToList();
+            country.ItemsSource = App.db.Countries.ToList();
 
             if (product != null)
             {
@@ -47,7 +48,6 @@ namespace AnbolCompany
                 meaning.SelectedIndex = product.UnitId - 1;
                 if (product.photoPath != null)
                     image.Source = BitmapFrame.Create( new MemoryStream(product.photoPath), BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-                country.ItemsSource = App.db.Countries.ToList();
                 foreach(var item in App.db.Product_Country.Where(p => p.Product.id == product.id).Select(c => c.Country).ToList())
                     country.SelectedItems.Add(item);
             }

@@ -44,6 +44,14 @@ namespace AnbolCompany
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (order1 == null)
+            {
+                order1 = App.db.Orders.Add(new Order { CustomerId = App.user.id, date = System.DateTime.Today, StageId = 1, ExecutorId = 3 });
+                App.db.SaveChanges();
+                productOrderList.ItemsSource = order1.Order_Product;
+                order_Products = order1.Order_Product.ToList();
+            }
+
             if (App.product.count - int.Parse(count.Text) < 0)
             {
                 MessageBox.Show("Нет такого количества товара");
@@ -139,17 +147,6 @@ namespace AnbolCompany
             MainWindow.Instance.frame.Navigate(new OrderPage());
         }
         #endregion
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (order1 == null)
-            {
-                order1 = App.db.Orders.Add(new Order { CustomerId = App.user.id, date = System.DateTime.Today, StageId = 1, ExecutorId = 3 });
-                App.db.SaveChanges();
-                productOrderList.ItemsSource = order1.Order_Product;
-                order_Products = order1.Order_Product.ToList();
-            }
-        }
 
         public void chancheVisibleButton()
         {
