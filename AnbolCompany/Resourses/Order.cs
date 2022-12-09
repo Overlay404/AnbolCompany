@@ -26,9 +26,9 @@ namespace AnbolCompany.Resourses
         public Nullable<int> ExecutorId { get; set; }
         public Nullable<int> StageId { get; set; }
     
-        public virtual RoleId RoleId { get; set; }
-        public virtual RoleId RoleId1 { get; set; }
         public virtual Stage Stage { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Product> Order_Product { get; set; }
     }

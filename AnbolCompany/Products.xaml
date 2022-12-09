@@ -42,12 +42,12 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
             <TextBlock Text="Поиск"/>
-            <TextBox x:Name="search" Width="200" Height="20" Margin="10 0 10 0"/>
+            <TextBox x:Name="search" Width="200" Height="20" Margin="10 0 10 0" TextChanged="search_TextChanged"/>
         </StackPanel>
         <ListView x:Name="listProducts" Grid.Row="1" Margin="10 0 10 35" d:ItemsSource="{d:SampleData ItemCount=3}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="5" CornerRadius="10" BorderThickness="2" Style="{DynamicResource borderProducts}">
+                    <Border Padding="5" CornerRadius="10" BorderBrush="{Binding ColorBorder}" BorderThickness="2" Style="{DynamicResource borderProducts}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="105"/>
@@ -68,7 +68,7 @@
                             <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=Product_Country}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="10 0 0 0">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Country.nameCountry}"/>
+                                        <TextBlock Text="{Binding Path=Country.nameCountry}" Background="{Binding Path=Country.color}"/>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>

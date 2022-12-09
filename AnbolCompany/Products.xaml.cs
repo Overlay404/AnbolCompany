@@ -100,15 +100,19 @@ namespace AnbolCompany
             if (filtration.SelectedIndex != -1 && sorting.SelectedIndex != -1 && quantity.SelectedIndex != -1)
                 Update();
         }
+        private void search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
         #endregion
 
         void Update()
         {
             productsObs.Clear();
 
-            listProducts.ItemsSource = App.db.Products.ToList();
+            listProducts.ItemsSource = App.db.Products.Where(p => p.nameProduct.StartsWith(search.Text)).ToList();
 
-            switch((filtration.SelectedItem as ComboBoxItem).Tag)
+            switch ((filtration.SelectedItem as ComboBoxItem).Tag)
             {
                 case "1":
                     products = (CollectionView)CollectionViewSource.GetDefaultView(listProducts.ItemsSource);
@@ -150,5 +154,7 @@ namespace AnbolCompany
                     break;
             }
         }
+
+       
     }
 }

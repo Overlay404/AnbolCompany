@@ -1,4 +1,5 @@
 ﻿using AnbolCompany.Resourses;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -24,39 +25,13 @@ namespace AnbolCompany
                 productOrderList.ItemsSource = order.Order_Product;
                 order_Products = order.Order_Product.ToList();
                 order1 = order;
+                sumOrder.Text = $"Конечная сумма заказа: {App.db.Order_Product.Where(o => o.OrderId == order1.id).Sum(o => o.cost * o.count)}";
+                countOrder.Text = $"Количество товаров в заказе: {App.db.Order_Product.Where(o => o.OrderId == order1.id).Sum(o => o.count)}";
             }
-
+            chancheVisibleButton();
             productList.ItemsSource = App.db.Products.ToList();
 
-            if (App.user.RoleId1.id == 1)
-            {
-                payment.Visibility = Visibility.Collapsed;
-                reject.Visibility = Visibility.Collapsed;
-                started.Visibility = Visibility.Collapsed;
-                execute.Visibility = Visibility.Collapsed;
-                ready.Visibility = Visibility.Collapsed;
-                newOrder.Visibility = Visibility.Visible;
-            }
-            else if (App.user.RoleId1.id == 2)
-            {
-                payment.Visibility = Visibility.Collapsed;
-                reject.Visibility = Visibility.Collapsed;
-                started.Visibility = Visibility.Collapsed;
-                execute.Visibility = Visibility.Visible;
-                ready.Visibility = Visibility.Visible;
-                newOrder.Visibility = Visibility.Collapsed;
-                addBtn.IsEnabled = false;
-            }
-            else if (App.user.RoleId1.id == 3)
-            {
-                payment.Visibility = Visibility.Visible;
-                reject.Visibility = Visibility.Visible;
-                started.Visibility = Visibility.Visible;
-                execute.Visibility = Visibility.Collapsed;
-                ready.Visibility = Visibility.Collapsed;
-                newOrder.Visibility = Visibility.Collapsed;
-                addBtn.IsEnabled = false;
-            }
+
         }
 
         private void productList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,6 +44,11 @@ namespace AnbolCompany
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (App.product.count - int.Parse(count.Text) < 0)
+            {
+                MessageBox.Show("Нет такого количества товара");
+                return;
+            }
             if (order_Products.Where(o => o.ProductId == App.product.id && o.OrderId == App.order.id).Select(o => o.ProductId).FirstOrDefault() != null)
             {
                 App.db.Order_Product.Remove(order_Products.Where(o => o.ProductId == App.product.id && o.OrderId == App.order.id).Select(o => o).FirstOrDefault());
@@ -78,12 +58,15 @@ namespace AnbolCompany
                 App.db.Order_Product.Add(new Order_Product { cost = int.Parse(cost.Text), count = int.Parse(count.Text), ProductId = App.product.id, OrderId = order1.id });
 
             App.order_product = order1.Order_Product.LastOrDefault();
+            App.product.count -= Convert.ToInt32(count.Text);
             App.db.SaveChanges();
 
-
             productOrderList.ItemsSource = App.db.Order_Product.Where(o => o.OrderId == order1.id).Select(o => o).ToList();
-        }
 
+            sumOrder.Text = $"Конечная сумма заказа: {App.db.Order_Product.Where(o => o.OrderId == order1.id).Sum(o => o.cost * o.count)}";
+            countOrder.Text = $"Количество товаров в заказе: {App.db.Order_Product.Where(o => o.OrderId == order1.id).Sum(o => o.count)}";
+        }
+        #region Обработчики кнопок
         private void newOrder_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.frame.Navigate(new OrderPage());
@@ -141,11 +124,8 @@ namespace AnbolCompany
 
         private void ready_Click(object sender, RoutedEventArgs e)
         {
-            if (order1.StageId == 4)
+            if (order1.StageId == 5)
             {
-                App.product.count += int.Parse(count.Text);
-                App.product.cost += int.Parse(cost.Text);
-
                 MainWindow.Instance.frame.Navigate(new OrderPage());
                 order1.StageId = 6;
                 App.db.SaveChanges();
@@ -154,19 +134,60 @@ namespace AnbolCompany
                 MessageBox.Show("Статус заказа не соответствует статусу: Выполняется");
         }
 
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.frame.Navigate(new OrderPage());
+        }
+        #endregion
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (order1 == null)
             {
-                order1 = App.db.Orders.Add(new Order { CustomerId = App.user.RoleId1.id, date = System.DateTime.Today, StageId = 1 });
+                order1 = App.db.Orders.Add(new Order { CustomerId = App.user.id, date = System.DateTime.Today, StageId = 1, ExecutorId = 3 });
                 App.db.SaveChanges();
                 productOrderList.ItemsSource = order1.Order_Product;
                 order_Products = order1.Order_Product.ToList();
             }
-            if (order1.StageId != 1)
+        }
+
+        public void chancheVisibleButton()
+        {
+            if (App.user.RoleId1.id == 1)
             {
+                payment.Visibility = Visibility.Collapsed;
+                reject.Visibility = Visibility.Collapsed;
+                started.Visibility = Visibility.Collapsed;
+                execute.Visibility = Visibility.Collapsed;
+                ready.Visibility = Visibility.Collapsed;
+                newOrder.Visibility = Visibility.Visible;
+            }
+            else if (App.user.RoleId1.id == 3)
+            {
+                payment.Visibility = Visibility.Visible;
+                reject.Visibility = Visibility.Visible;
+                started.Visibility = Visibility.Visible;
+                execute.Visibility = Visibility.Visible;
+                ready.Visibility = Visibility.Visible;
+                newOrder.Visibility = Visibility.Collapsed;
                 addBtn.IsEnabled = false;
             }
+            if (!OrderPage.isPlusPress)
+            {
+                if (order1.StageId == 3)
+                {
+                    payment.Visibility = Visibility.Collapsed;
+                    reject.Visibility = Visibility.Collapsed;
+                    started.Visibility = Visibility.Collapsed;
+                    execute.Visibility = Visibility.Collapsed;
+                    ready.Visibility = Visibility.Collapsed;
+                    newOrder.Visibility = Visibility.Collapsed;
+                    exit.Visibility = Visibility.Visible;
+                    addBtn.IsEnabled = false;
+                }
+            }
         }
+
+
     }
 }

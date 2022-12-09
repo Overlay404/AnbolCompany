@@ -14,6 +14,13 @@ namespace AnbolCompany.Resourses
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Orders = new HashSet<Order>();
+            this.Orders1 = new HashSet<Order>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public Nullable<int> RoleId { get; set; }
@@ -27,6 +34,10 @@ namespace AnbolCompany.Resourses
         public byte[] photoPath { get; set; }
     
         public virtual Gender Gender { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders1 { get; set; }
         public virtual RoleId RoleId1 { get; set; }
     }
 }

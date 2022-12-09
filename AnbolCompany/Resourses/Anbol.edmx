@@ -98,30 +98,6 @@
           <Property Name="GenderId" Type="int" />
           <Property Name="photoPath" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Order_RoleId">
-          <End Role="RoleId" Type="Self.RoleId" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoleId">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_RoleId1">
-          <End Role="RoleId" Type="Self.RoleId" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoleId">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ExecutorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Stage">
           <End Role="Stage" Type="Self.Stage" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -131,6 +107,30 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ExecutorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -229,16 +229,16 @@
           <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Order_RoleId" Association="Self.FK_Order_RoleId">
-            <End Role="RoleId" EntitySet="RoleId" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_RoleId1" Association="Self.FK_Order_RoleId1">
-            <End Role="RoleId" EntitySet="RoleId" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Stage" Association="Self.FK_Order_Stage">
             <End Role="Stage" EntitySet="Stage" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User1" Association="Self.FK_Order_User1">
+            <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_Order" Association="Self.FK_OrderProduct_Order">
@@ -293,16 +293,16 @@
             <End Role="Gender" EntitySet="Genders" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_RoleId" Association="AnbolModel.FK_Order_RoleId">
-            <End Role="RoleId" EntitySet="RoleIds" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_RoleId1" Association="AnbolModel.FK_Order_RoleId1">
-            <End Role="RoleId" EntitySet="RoleIds" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Stage" Association="AnbolModel.FK_Order_Stage">
             <End Role="Stage" EntitySet="Stages" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="AnbolModel.FK_Order_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User1" Association="AnbolModel.FK_Order_User1">
+            <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_Order" Association="AnbolModel.FK_OrderProduct_Order">
@@ -352,9 +352,9 @@
           <Property Name="CustomerId" Type="Int32" />
           <Property Name="ExecutorId" Type="Int32" />
           <Property Name="StageId" Type="Int32" />
-          <NavigationProperty Name="RoleId" Relationship="AnbolModel.FK_Order_RoleId" FromRole="Order" ToRole="RoleId" />
-          <NavigationProperty Name="RoleId1" Relationship="AnbolModel.FK_Order_RoleId1" FromRole="Order" ToRole="RoleId" />
           <NavigationProperty Name="Stage" Relationship="AnbolModel.FK_Order_Stage" FromRole="Order" ToRole="Stage" />
+          <NavigationProperty Name="User" Relationship="AnbolModel.FK_Order_User" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="AnbolModel.FK_Order_User1" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="Order_Product" Relationship="AnbolModel.FK_OrderProduct_Order" FromRole="Order" ToRole="Order_Product" />
         </EntityType>
         <EntityType Name="Order_Product">
@@ -365,9 +365,9 @@
           <Property Name="ProductId" Type="Int32" />
           <Property Name="OrderId" Type="Int32" />
           <Property Name="count" Type="Int32" />
+          <Property Name="cost" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="AnbolModel.FK_OrderProduct_Order" FromRole="Order_Product" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="AnbolModel.FK_OrderProduct_Product" FromRole="Order_Product" ToRole="Product" />
-          <Property Name="cost" Type="Int32" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -401,8 +401,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="AnbolModel.FK_Order_RoleId" FromRole="RoleId" ToRole="Order" />
-          <NavigationProperty Name="Orders1" Relationship="AnbolModel.FK_Order_RoleId1" FromRole="RoleId" ToRole="Order" />
           <NavigationProperty Name="Users" Relationship="AnbolModel.FK_User_RoleId" FromRole="RoleId" ToRole="User" />
         </EntityType>
         <EntityType Name="Stage">
@@ -437,6 +435,8 @@
           <Property Name="GenderId" Type="Int32" />
           <Property Name="photoPath" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Gender" Relationship="AnbolModel.FK_User_Gender" FromRole="User" ToRole="Gender" />
+          <NavigationProperty Name="Orders" Relationship="AnbolModel.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="AnbolModel.FK_Order_User1" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="RoleId1" Relationship="AnbolModel.FK_User_RoleId" FromRole="User" ToRole="RoleId" />
         </EntityType>
         <Association Name="FK_ProductCountry_Country">
@@ -463,30 +463,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_RoleId">
-          <End Type="AnbolModel.RoleId" Role="RoleId" Multiplicity="0..1" />
-          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoleId">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_RoleId1">
-          <End Type="AnbolModel.RoleId" Role="RoleId" Multiplicity="0..1" />
-          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoleId">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ExecutorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Stage">
           <End Type="AnbolModel.Stage" Role="Stage" Multiplicity="0..1" />
           <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
@@ -496,6 +472,30 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="StageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Type="AnbolModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User1">
+          <End Type="AnbolModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="AnbolModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ExecutorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -559,7 +559,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

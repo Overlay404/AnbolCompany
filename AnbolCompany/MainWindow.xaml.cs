@@ -20,7 +20,7 @@ namespace AnbolCompany
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        public static bool isRoleIdMened;
         public static MainWindow Instance { get; set; }
 
         public MainWindow()
@@ -63,6 +63,10 @@ namespace AnbolCompany
         {
             frame.Navigate(new UserInfo());
         }
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new AddProduct());
+        }
 
         private void exitImage_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -93,10 +97,15 @@ namespace AnbolCompany
                 editImage.Visibility = Visibility.Visible;
                 plusImage.Visibility = Visibility.Visible;
             }
-            else if (frame.Content.ToString().Equals("AnbolCompany.OrderPage"))
+            else if (frame.Content.ToString().Equals("AnbolCompany.OrderPage") && isRoleIdMened)
             {
                 editImage.Visibility = Visibility.Visible;
                 plusImage.Visibility = Visibility.Visible;
+            }
+            else if (frame.Content.ToString().Equals("AnbolCompany.OrderPage") && !isRoleIdMened)
+            {
+                editImage.Visibility = Visibility.Visible;
+                plusImage.Visibility = Visibility.Collapsed;
             }
             else
             {
