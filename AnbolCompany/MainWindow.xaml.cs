@@ -21,6 +21,7 @@ namespace AnbolCompany
     public partial class MainWindow : Window
     {
         public static bool isRoleIdMened;
+        public static bool isRoleIdAdmin;
         public static MainWindow Instance { get; set; }
 
         public MainWindow()
@@ -92,11 +93,6 @@ namespace AnbolCompany
                 editImage.Visibility = Visibility.Visible;
                 plusImage.Visibility = Visibility.Collapsed;
             }
-            else if (frame.Content.ToString().Equals("AnbolCompany.Products"))
-            {
-                editImage.Visibility = Visibility.Visible;
-                plusImage.Visibility = Visibility.Visible;
-            }
             else if (frame.Content.ToString().Equals("AnbolCompany.OrderPage") && isRoleIdMened)
             {
                 editImage.Visibility = Visibility.Visible;
@@ -106,6 +102,16 @@ namespace AnbolCompany
             {
                 editImage.Visibility = Visibility.Visible;
                 plusImage.Visibility = Visibility.Collapsed;
+            }
+            else if (frame.Content.ToString().Equals("AnbolCompany.Products") && !isRoleIdAdmin)
+            {
+                editImage.Visibility = Visibility.Collapsed;
+                plusImage.Visibility = Visibility.Collapsed;
+            }
+            else if (frame.Content.ToString().Equals("AnbolCompany.Products") && isRoleIdAdmin)
+            {
+                editImage.Visibility = Visibility.Visible;
+                plusImage.Visibility = Visibility.Visible;
             }
             else
             {

@@ -38,6 +38,7 @@ namespace AnbolCompany
                 Update();
             MainWindow.Instance.plusImage.MouseUp += PlusImage_MouseUp;
             MainWindow.Instance.editImage.MouseUp += EditImage_MouseUp;
+
         }
 
 
